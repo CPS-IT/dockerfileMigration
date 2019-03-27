@@ -32,7 +32,7 @@ RUN apt-get update \
     && rm -Rf /tmp-libsodium/ \
     && docker-php-ext-install sodium \
     && docker-php-ext-enable sodium \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server-5.6 && service mysql start && mysql -uroot -e "create database migrate;"
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server && service mysql start && mysql -uroot -e "create database migrate;"
 
 RUN echo "memory_limit = -1;" > $PHP_INI_DIR/conf.d/memory_limit.ini
 
