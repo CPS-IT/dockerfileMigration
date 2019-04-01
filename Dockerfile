@@ -10,8 +10,8 @@ RUN apt-get update \
     && docker-php-ext-install gettext \
     && docker-php-ext-install curl \
     && docker-php-ext-install pdo_mysql \
-  && docker-php-ext-install mysqli \
-  && docker-php-ext-enable mysqli \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-enable mysqli \
     && docker-php-ext-install json \
     && docker-php-ext-install intl \
     && docker-php-ext-install opcache \
@@ -32,6 +32,9 @@ RUN apt-get update \
     && rm -Rf /tmp-libsodium/ \
     && docker-php-ext-install sodium \
     && docker-php-ext-enable sodium \
+    && apt-get install python \
+    && wget -O - https://bootstrap.pypa.io/get-pip.py | python \
+    && pip install parseyml \
     && DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server && service mysql start && mysql -uroot -e "create database migrate;"
 
 RUN echo "memory_limit = -1;" > $PHP_INI_DIR/conf.d/memory_limit.ini
