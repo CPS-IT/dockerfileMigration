@@ -33,7 +33,7 @@ RUN apt-get update \
     && docker-php-ext-install sodium \
     && docker-php-ext-enable sodium \
     && apt-get install -y python-pip \
-    && pip install parseyml \
+    && /usr/bin/pip install parseyml \
     && DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server && service mysql start && mysql -uroot -e "create database migrate;"
 
 RUN echo "memory_limit = -1;" > $PHP_INI_DIR/conf.d/memory_limit.ini
