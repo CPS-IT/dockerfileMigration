@@ -32,7 +32,8 @@ RUN apt-get update \
     && rm -Rf /tmp-libsodium/ \
     && docker-php-ext-install sodium \
     && docker-php-ext-enable sodium \
-    && apt-get install -y python-pip \
+    && apt-get -qq install python-pip \
+    && python -m pip install --upgrade pip \
     && python -m pip install parseyml \
     && DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server && service mysql start && mysql -uroot -e "create database migrate;"
 
