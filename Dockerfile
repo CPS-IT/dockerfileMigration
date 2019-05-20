@@ -42,6 +42,9 @@ RUN echo "max_allowed_packet=1000000000;" > /etc/mysql/my.cnf
 RUN echo "foreign_key_checks=0;" > /etc/mysql/my.cnf
 RUN echo "innodb_flush_log_at_trx_commit=2;" > /etc/mysql/my.cnf
 
+# Restart mysql to make settings work
+RUN service mysql restart
+
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
