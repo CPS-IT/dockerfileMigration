@@ -36,6 +36,15 @@ RUN apt-get update \
 
 RUN echo "memory_limit = -1;" > $PHP_INI_DIR/conf.d/memory_limit.ini
 
+# Set MySQL settings to speed up import
+RUN echo "net_buffer_length=1000000" >> /etc/mysql/my.cnf
+RUN echo "max_allowed_packet=1000000000" >> /etc/mysql/my.cnf
+RUN echo "innodb_flush_log_at_trx_commit=2" >> /etc/mysql/my.cnf
+
+# Restart mysql to make settings work
+RUN service mysql stop && service mysql start
+
+
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer global require "fxp/composer-asset-plugin:^1.4.2"
