@@ -19,19 +19,6 @@ RUN apt-get update \
     && docker-php-ext-install gd \
     && pecl install --nodeps mcrypt-snapshot \
     && docker-php-ext-enable mcrypt \
-    && mkdir -p /tmp-libsodium/libsodium \
-    && cd /tmp-libsodium/libsodium \
-    && curl -L https://download.libsodium.org/libsodium/releases/libsodium-1.0.16.tar.gz -o libsodium-1.0.16.tar.gz \
-    && tar xfvz libsodium-1.0.16.tar.gz \
-    && cd /tmp-libsodium/libsodium/libsodium-1.0.16/ \
-    && ./configure \
-    && make \
-    && make check \
-    && make install \
-    && mv src/libsodium /usr/local/ \
-    && rm -Rf /tmp-libsodium/ \
-    && docker-php-ext-install sodium \
-    && docker-php-ext-enable sodium \
     && DEBIAN_FRONTEND=noninteractive apt-get -y install mysql-server && service mysql start && mysql -uroot -e "create database migrate;"
 
 RUN echo "memory_limit = -1;" > $PHP_INI_DIR/conf.d/memory_limit.ini
