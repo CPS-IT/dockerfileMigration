@@ -1,4 +1,4 @@
-FROM php:7.2
+FROM php:7.2-stretch
 
 RUN apt-get update \
     && apt-get install -y gnupg libcurl4-openssl-dev sudo git libxslt-dev zlib1g-dev graphviz zip libmcrypt-dev libicu-dev g++ libpcre3-dev libgd-dev libfreetype6-dev sqlite curl build-essential unzip gcc make autoconf libc-dev pkg-config pv \
